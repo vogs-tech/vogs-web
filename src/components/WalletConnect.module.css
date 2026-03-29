@@ -1,0 +1,6 @@
+.connected { display: flex; align-items: center; gap: 0.8rem; }
+.address { font-family: monospace; font-size: 1.3rem; padding: 0.4rem 0.8rem; border-radius: 0.4rem; background: var(--color-bg-secondary); color: var(--color-text-primary); }
+.disconnectBtn { padding: 0.6rem 1.2rem; border-radius: 0.8rem; background: transparent; border: 0.1rem solid var(--color-border-default); color: var(--color-text-secondary); cursor: pointer; font-size: 1.2rem; }
+.disconnectBtn:hover { border-color: var(--color-error); color: var(--color-error); }
+.connectBtn { padding: 0.8rem 1.6rem; border-radius: 0.8rem; background: var(--color-brand-primary); color: #fff; border: none; cursor: pointer; font-size: 1.3rem; font-weight: 500; }
+.connectBtn:hover { background: var(--color-brand-hover); }
