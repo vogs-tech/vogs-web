@@ -1,0 +1,9 @@
+import "../globals.css";
+
+export default function PublicLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      {children}
+    </div>
+  );
+}

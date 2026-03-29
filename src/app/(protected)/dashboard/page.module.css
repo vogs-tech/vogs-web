@@ -1,0 +1,12 @@
+.page { display: flex; flex-direction: column; gap: 2.4rem; }
+.heading { font-size: 2.4rem; font-weight: 700; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1.6rem; }
+.statCard { background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur-md)); border: 0.1rem solid var(--glass-border); border-radius: 1.2rem; padding: 2rem; display: flex; flex-direction: column; gap: 0.4rem; box-shadow: var(--glass-shadow); }
+.statLabel { font-size: 1.2rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.statValue { font-size: 2.4rem; font-weight: 700; color: var(--color-text-primary); }
+.section { display: flex; flex-direction: column; gap: 1.2rem; }
+.section h3 { font-size: 1.6rem; font-weight: 600; }
+.empty { color: var(--color-text-muted); font-size: 1.4rem; }
+.list { display: flex; flex-direction: column; gap: 0.4rem; }
+.item { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.6rem; background: var(--glass-bg); border: 0.1rem solid var(--glass-border); border-radius: 0.8rem; font-size: 1.4rem; }
+.badge { padding: 0.2rem 0.8rem; border-radius: 10rem; font-size: 1.2rem; background: var(--color-brand-muted); color: var(--color-brand-primary); }

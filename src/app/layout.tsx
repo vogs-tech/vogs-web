@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { Sidebar } from "@/components/Sidebar";
-import { Header } from "@/components/Header";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"], display: "swap" });
@@ -22,13 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body>
-        <div className="app-layout">
-          <Sidebar />
-          <div className="app-main">
-            <Header />
-            <main className="app-content">{children}</main>
-          </div>
-        </div>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
