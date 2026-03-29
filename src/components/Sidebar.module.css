@@ -1,0 +1,9 @@
+.sidebar { width: 22rem; height: 100vh; position: fixed; left: 0; top: 0; background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur-lg)); -webkit-backdrop-filter: blur(var(--glass-blur-lg)); border-right: 0.1rem solid var(--glass-border); padding: var(--space-4); display: flex; flex-direction: column; z-index: 100; }
+.logo { font-size: 2.4rem; font-weight: 700; color: var(--color-brand-primary); padding: var(--space-4) 0; }
+.nav { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.link { display: flex; align-items: center; gap: 1.2rem; padding: 1rem 1.2rem; border-radius: 0.8rem; text-decoration: none; color: var(--color-text-secondary); transition: all 200ms ease; font-size: 1.4rem; }
+.link:hover { background: var(--color-bg-secondary); color: var(--color-text-primary); }
+.active { background: var(--color-brand-muted); color: var(--color-brand-primary); font-weight: 500; }
+.icon { width: 2rem; text-align: center; font-weight: 600; }
+.label { flex: 1; }
+@media (max-width: 768px) { .sidebar { width: 6rem; } .label { display: none; } }

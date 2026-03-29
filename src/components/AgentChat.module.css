@@ -1,0 +1,11 @@
+.chat { display: flex; flex-direction: column; height: 100%; }
+.messages { flex: 1; overflow-y: auto; padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+.message { max-width: 80%; padding: 1.2rem 1.6rem; border-radius: 1.2rem; font-size: 1.4rem; line-height: 1.5; }
+.user { align-self: flex-end; background: var(--color-brand-primary); color: #fff; }
+.agent { align-self: flex-start; background: var(--color-bg-secondary); color: var(--color-text-primary); }
+.typing { font-size: 1.3rem; color: var(--color-text-muted); padding: 0.8rem; }
+.error { font-size: 1.3rem; color: var(--color-error); padding: 0.8rem; }
+.inputBar { display: flex; gap: 0.8rem; padding: var(--space-4); border-top: 0.1rem solid var(--glass-border); }
+.input { flex: 1; padding: 1rem 1.6rem; border: 0.1rem solid var(--color-border-default); border-radius: 0.8rem; font-size: 1.4rem; background: var(--color-bg-primary); color: var(--color-text-primary); }
+.sendBtn { padding: 1rem 2rem; border-radius: 0.8rem; background: var(--color-brand-primary); color: #fff; border: none; cursor: pointer; font-weight: 500; }
+.sendBtn:disabled { opacity: 0.5; }

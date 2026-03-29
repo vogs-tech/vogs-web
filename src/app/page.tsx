@@ -1,66 +1,33 @@
-import Image from "next/image";
 import styles from "./page.module.css";
 
-export default function Home() {
+export default function DashboardPage() {
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      <h2 className={styles.heading}>Dashboard Overview</h2>
+      <div className={styles.stats}>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Total AUM</span>
+          <span className={styles.statValue}>$12.4M</span>
+          <span className={styles.statChange}>+2.3%</span>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Yield Earned</span>
+          <span className={styles.statValue}>$142.3K</span>
+          <span className={styles.statChange}>+8.1%</span>
         </div>
-      </main>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Active Streams</span>
+          <span className={styles.statValue}>23</span>
+        </div>
+      </div>
+      <div className={styles.section}>
+        <h3>Vault Balances</h3>
+        <div className={styles.vaultGrid}>
+          <div className={styles.vaultCard}>USDC Vault — $4.2M — 4.8% APY</div>
+          <div className={styles.vaultCard}>EURC Vault — $3.1M — 3.2% APY</div>
+          <div className={styles.vaultCard}>XAUT Vault — $5.1M — 1.5% APY</div>
+        </div>
+      </div>
     </div>
   );
 }
