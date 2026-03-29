@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vogs-web — Treasury Dashboard
 
-## Getting Started
+Next.js 16 institutional treasury dashboard with Solana wallet integration, real-time WebSocket data, AI agent chat, and compliance monitoring.
 
-First, run the development server:
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Dashboard overview — AUM, yield earned, active streams, vault balances |
+| `/vaults` | Vault management — balances, APY, allocation strategy |
+| `/payments` | Payment history — table with KYT status badges, new payment modal |
+| `/streams` | Payment streams — active streams with rate and remaining amount |
+| `/collateral` | Collateral positions — pledged assets, LTV, health factor |
+| `/compliance` | Compliance dashboard — KYT alerts, Travel Rule log, blocked payments |
+| `/agent` | AI agent chat — natural language commands with streaming responses |
+
+## Prerequisites
+
+- Bun 1.2+
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_API_URL` | Yes | Backend API URL (e.g., http://localhost:8080) |
+| `NEXT_PUBLIC_WS_URL` | Yes | WebSocket URL (e.g., ws://localhost:8080/ws) |
+| `NEXT_PUBLIC_SOLANA_RPC_URL` | No | Solana RPC (default: devnet) |
+| `NEXT_PUBLIC_SOLANA_NETWORK` | No | Network name (default: devnet) |
+| `PORT` | No | Server port (default: 3000) |
 
-## Learn More
+All `NEXT_PUBLIC_*` variables are **build-time** — they are baked into the JavaScript bundle during `bun run build`.
 
-To learn more about Next.js, take a look at the following resources:
+## Run
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Development
+bun dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Production build
+bun run build
 
-## Deploy on Vercel
+# Start production server
+bun start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Linting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+bun run lint      # Check with Biome
+bun run format    # Auto-format
+```
+
+## Docker
+
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_API_URL=http://localhost:8080 \
+  --build-arg NEXT_PUBLIC_WS_URL=ws://localhost:8080/ws \
+  .
+```
+
+3-stage build: deps → builder (with `NEXT_PUBLIC_*` as `ARG`) → runner (non-root `nextjs` user).
+
+## Key Features
+
+- **Solana Wallet Adapter** — Phantom, Solflare via `@solana/wallet-adapter-react`
+- **WebSocket Hooks** — `useWebSocket` with exponential backoff reconnection
+- **Domain Hooks** — `useVaults`, `usePayments`, `useStreams`, `useCollateral`
+- **AI Chat** — `useAgent` hook with streaming responses
+- **Theme** — Light default, dark mode via `useTheme` + localStorage persistence
+- **PWA** — `manifest.json` with standalone display mode
+
+## Project Structure
+
+```
+vogs-web/
+├── next.config.ts         # output: "standalone", reactCompiler: true
+├── public/
+│   └── manifest.json      # PWA manifest
+├── src/
+│   ├── app/               # Next.js App Router
+│   │   ├── layout.tsx     # Root layout (Sidebar + Header)
+│   │   ├── globals.css    # CSS custom properties (light/dark)
+│   │   ├── page.tsx       # Dashboard (/)
+│   │   ├── vaults/        # /vaults
+│   │   ├── payments/      # /payments
+│   │   ├── streams/       # /streams
+│   │   ├── collateral/    # /collateral
+│   │   ├── compliance/    # /compliance
+│   │   └── agent/         # /agent
+│   ├── components/        # App-specific components
+│   │   ├── Sidebar.tsx, Header.tsx
+│   │   ├── Providers.tsx, WalletConnect.tsx
+│   │   ├── TreasurySummary.tsx, VaultCard.tsx
+│   │   ├── PaymentForm.tsx, ComplianceDashboard.tsx
+│   │   └── AgentChat.tsx
+│   ├── hooks/             # Custom React hooks
+│   │   ├── useWebSocket.ts, useTheme.ts, useAgent.ts
+│   │   ├── useVaults.ts, usePayments.ts
+│   │   ├── useStreams.ts, useCollateral.ts
+│   └── lib/               # Utility modules
+│       ├── config.ts      # NEXT_PUBLIC_* centralized access
+│       ├── types.ts       # TypeScript interfaces
+│       ├── api.ts         # HTTP client functions
+│       └── solana.ts      # Connection + wallet setup
+└── Dockerfile
+```
+
+## Technical Note
+
+`output: "standalone"` is set in `next.config.ts` for Docker deployment. The runner stage copies only `.next/standalone` and `.next/static`.
