@@ -4,15 +4,26 @@ Next.js 16 institutional treasury dashboard with Solana wallet integration, real
 
 ## Pages
 
+### Public (no auth required)
+
 | Route | Description |
 |-------|-------------|
-| `/` | Dashboard overview — AUM, yield earned, active streams, vault balances |
+| `/` | Landing page — hero, features, CTA buttons |
+| `/login` | Sign in — passkey, wallet, or email+password |
+| `/signup` | Create account — institution, email, password |
+
+### Protected (auth required — redirects to /login)
+
+| Route | Description |
+|-------|-------------|
+| `/dashboard` | Dashboard overview — AUM, vault count, recent payments (live API data) |
 | `/vaults` | Vault management — balances, APY, allocation strategy |
 | `/payments` | Payment history — table with KYT status badges, new payment modal |
 | `/streams` | Payment streams — active streams with rate and remaining amount |
 | `/collateral` | Collateral positions — pledged assets, LTV, health factor |
 | `/compliance` | Compliance dashboard — KYT alerts, Travel Rule log, blocked payments |
 | `/agent` | AI agent chat — natural language commands with streaming responses |
+| `/settings/security` | Auth methods — linked wallets, passkeys, active sessions |
 
 ## Prerequisites
 
