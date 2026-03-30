@@ -1,19 +1,30 @@
 "use client";
 
 import { useMemo, type ReactNode } from "react";
-import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { config } from "@/lib/config";
 
-import "@solana/wallet-adapter-react-ui/styles.css";
+let ConnectionProvider: any;
+let WalletProvider: any;
+let WalletModalProvider: any;
+
+try {
+  const walletAdapter = require("@solana/wallet-adapter-react");
+  const walletModal = require("@solana/wallet-adapter-react-ui");
+  ConnectionProvider = walletAdapter.ConnectionProvider;
+  WalletProvider = walletAdapter.WalletProvider;
+  WalletModalProvider = walletModal.WalletModalProvider;
+  require("@solana/wallet-adapter-react-ui/styles.css");
+} catch {
+  // Wallet adapter not available — render children without wallet context
+}
 
 export function Providers({ children }: { children: ReactNode }) {
-  const endpoint = config.solanaRpcUrl;
-  const wallets = useMemo(() => [
-    new PhantomWalletAdapter(),
-    new SolflareWalletAdapter(),
-  ], []);
+  const endpoint = config.solanaRpcUrl || "https://api.devnet.solana.com";
+  const wallets = useMemo(() => [], []);
+
+  if (!ConnectionProvider || !WalletProvider || !WalletModalProvider) {
+    return <>{children}</>;
+  }
 
   return (
     <ConnectionProvider endpoint={endpoint}>

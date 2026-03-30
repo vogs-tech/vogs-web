@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import styles from "./page.module.css";
 
 export default function LandingPage() {
@@ -7,6 +8,7 @@ export default function LandingPage() {
       <header className={styles.header}>
         <span className={styles.logo}>VOGS</span>
         <nav className={styles.nav}>
+          <ThemeToggle />
           <Link href="/login" className={styles.signIn}>Sign In</Link>
           <Link href="/signup" className={styles.getStarted}>Get Started</Link>
         </nav>

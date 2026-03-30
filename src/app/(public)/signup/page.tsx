@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import styles from "./page.module.css";
 
 export default function SignupPage() {
@@ -11,7 +12,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [institution, setInstitution] = useState("");
+  const [institution, setInstitution] = useState("11111111-1111-1111-1111-111111111111");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -42,6 +43,10 @@ export default function SignupPage() {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.8rem" }}>
+          <Link href="/" style={{ fontSize: "1.3rem", color: "var(--color-text-muted)" }}>← Back to home</Link>
+          <ThemeToggle />
+        </div>
         <h1 className={styles.title}>Create Your VOGS Account</h1>
 
         <form className={styles.form} onSubmit={handleSubmit}>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./Sidebar.module.css";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Dashboard", icon: "D" },
+  { href: "/dashboard", label: "Dashboard", icon: "D" },
   { href: "/vaults", label: "Vaults", icon: "V" },
   { href: "/payments", label: "Payments", icon: "P" },
   { href: "/streams", label: "Streams", icon: "S" },
