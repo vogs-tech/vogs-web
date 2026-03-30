@@ -100,27 +100,36 @@ vogs-web/
 │   └── manifest.json      # PWA manifest
 ├── src/
 │   ├── app/               # Next.js App Router
-│   │   ├── layout.tsx     # Root layout (Sidebar + Header)
+│   │   ├── layout.tsx     # Root layout (Providers wrapper)
 │   │   ├── globals.css    # CSS custom properties (light/dark)
-│   │   ├── page.tsx       # Dashboard (/)
-│   │   ├── vaults/        # /vaults
-│   │   ├── payments/      # /payments
-│   │   ├── streams/       # /streams
-│   │   ├── collateral/    # /collateral
-│   │   ├── compliance/    # /compliance
-│   │   └── agent/         # /agent
+│   │   ├── (public)/      # Route group: no auth required
+│   │   │   ├── page.tsx       # Landing page (/)
+│   │   │   ├── login/         # /login
+│   │   │   └── signup/        # /signup
+│   │   └── (protected)/   # Route group: auth required (AuthGuard)
+│   │       ├── layout.tsx     # Sidebar + Header
+│   │       ├── dashboard/     # /dashboard
+│   │       ├── vaults/        # /vaults
+│   │       ├── payments/      # /payments
+│   │       ├── streams/       # /streams
+│   │       ├── collateral/    # /collateral
+│   │       ├── compliance/    # /compliance
+│   │       ├── agent/         # /agent
+│   │       └── settings/      # /settings/security
 │   ├── components/        # App-specific components
-│   │   ├── Sidebar.tsx, Header.tsx
-│   │   ├── Providers.tsx, WalletConnect.tsx
+│   │   ├── Sidebar.tsx, Header.tsx, ThemeToggle.tsx
+│   │   ├── Providers.tsx, WalletConnect.tsx, AuthGuard.tsx
+│   │   ├── LoginForm.tsx, WalletSignIn.tsx, PasskeyButton.tsx
 │   │   ├── TreasurySummary.tsx, VaultCard.tsx
 │   │   ├── PaymentForm.tsx, ComplianceDashboard.tsx
 │   │   └── AgentChat.tsx
 │   ├── hooks/             # Custom React hooks
-│   │   ├── useWebSocket.ts, useTheme.ts, useAgent.ts
+│   │   ├── useAuth.ts, useWebSocket.ts, useTheme.ts, useAgent.ts
 │   │   ├── useVaults.ts, usePayments.ts
 │   │   ├── useStreams.ts, useCollateral.ts
 │   └── lib/               # Utility modules
-│       ├── config.ts      # NEXT_PUBLIC_* centralized access
+│       ├── config.ts      # NEXT_PUBLIC_* with console.warn fallback
+│       ├── auth.ts        # Auth API client (signup, login, wallet, passkey)
 │       ├── types.ts       # TypeScript interfaces
 │       ├── api.ts         # HTTP client functions
 │       └── solana.ts      # Connection + wallet setup
